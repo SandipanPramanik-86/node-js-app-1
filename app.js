@@ -30,7 +30,7 @@ app.get('/', function (req, res) {
 });
 
   
-// Defining get request at '/multiple' route
+// Defining get request at '/single' route
 app.get('/single', function(req, res) {
   res.json({
     id: 1,
@@ -39,7 +39,7 @@ app.get('/single', function(req, res) {
   });
 });
   
-// Defining get request at '/array' route
+// Defining get request at '/list' route
 app.get('/list', function(req, res) {
   res.json([{
         id: 1,
@@ -53,6 +53,36 @@ app.get('/list', function(req, res) {
     }
   ]);
 });
+
+app.get('/employees/:id', function(req, res) {
+	var empId = req.params.id;
+
+  var empFound = employeesList.filter(function(employee) {
+    return employee.id == empId;
+  });
+  res.send(empFound);	
+});
+
+
+var employeesList = [
+  {
+      id: 1,
+      firstName: 'Sandipan',
+      lastName: 'Pramanik',
+      email: 'sandipan.andul@gmail.com'
+  },  
+  {
+      id: 2,
+      firstName: 'Sayantan',
+      lastName: 'Sinha',
+      email: 'sayantan.sinha@gmail.com'
+  },
+  {
+      id: 3,
+      firstName: 'Shuvomay',
+      lastName: 'Basak',
+      email: 'shuvomay.basak@gmail.com'
+  }];
 
 
 app.listen(PORT);
