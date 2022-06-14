@@ -24,9 +24,36 @@ if (process.env.PORT) {
 }
 
 var app = express();
+
 app.get('/', function (req, res) {
   res.send(message.getWelcomeMessage());
 });
+
+  
+// Defining get request at '/multiple' route
+app.get('/single', function(req, res) {
+  res.json({
+    id: 1,
+    firstName: 'Sandipan',
+    lastName: 'Pramanik'
+  });
+});
+  
+// Defining get request at '/array' route
+app.get('/list', function(req, res) {
+  res.json([{
+        id: 1,
+        firstName: 'Sandipan',
+        lastName: 'Pramanik'
+    },
+    {
+        id: 2,
+        firstName: 'Adrish',
+        lastName: 'Pramanik'
+    }
+  ]);
+});
+
 
 app.listen(PORT);
 console.log(message.getPortMessage() + PORT);
