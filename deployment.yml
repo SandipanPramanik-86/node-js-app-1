@@ -1,0 +1,81 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hellonode-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: hellonode-app
+  template:
+    metadata:
+      labels:
+        app: hellonode-app
+    spec:
+      containers:
+      - name: hellonode-app
+        image: webapp:1
+        # for local development against minikube registry
+        #imagePullPolicy: Never        
+        ports:
+        - containerPort: 8080
+        resources:
+           limits:
+             memory: 32Mi
+             cpu: 125m
+           requests:
+             memory: 32Mi
+             cpu: 125m
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: hellonode-service
+  labels:
+    app: hellonode-service
+spec:
+  type: NodePort
+  ports:
+    # the port that this service should serve on
+    - port: 80
+      targetPort: 8080
+  # label keys and values that must match in order to receive traffic for this service
+  selector:
+    app: hellonode-app
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: hellonode-service-cip
+  labels:
+    app: hellonode-app
+spec:
+  type: ClusterIP
+  ports:
+    # the port that this service should serve on
+    - port: 80
+      targetPort: 8080
+  # label keys and values that must match in order to receive traffic for this service
+  selector:
+    app: hellonode-app
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: hellonode-ingress
+spec:
+  rules:
+  - host: hellonode-app.cluster-ingress-subdomain
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: hellonode-service-cip
+            port:
+              number: 80
+  tls:
+  - hosts:
+    - hellonode-app.cluster-ingress-subdomain
+    secretName: cluster-ingress-secret
