@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: hellonode-app
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: hellonode-app
