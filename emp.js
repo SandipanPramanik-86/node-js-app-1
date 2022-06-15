@@ -14,8 +14,9 @@ exports.getEmployeeById =  function(req, res) {
   };
 
   exports.createEmployee = function(req, res) {
-    
+
     var data = req.body;
+    console.log('createEmployee body: ' + data);
     employeesList.push(data);
     res.send({message: 'Successfully created employee data'});
 }; 
