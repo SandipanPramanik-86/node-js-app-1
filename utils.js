@@ -1,6 +1,4 @@
 
-
-  
 const welcomeMessage = "Welcome to IBM Cloud Continuous Delivery Service!";
 const portMessage = "Application Running on port";
 
