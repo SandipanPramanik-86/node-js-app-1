@@ -1,7 +1,7 @@
 
 exports.getEmployees = function(req, res) {
     res.send(employeesList);
-  };
+};
   
 exports.getEmployeeById =  function(req, res) {
       var empId = req.params.id;
@@ -11,15 +11,32 @@ exports.getEmployeeById =  function(req, res) {
     });
   
     res.send(empFound);	
-  };
+};
 
-  exports.createEmployee = function(req, res) {
+exports.createEmployee = function(req, res) {
 
     var data = req.body;
-    console.log('createEmployee body: ' + data);
     employeesList.push(data);
     res.send({message: 'Successfully created employee data'});
 }; 
+
+exports.updateEmployee = function(req, res) {
+  var paramId = req.params.id;
+  var data = req.body;
+
+  for (var index = 0; index < employeesList.length; index++) {
+    if (employeesList[index].id === paramId) {
+      console.log(paramId + data.firstName);
+      employeesList[index].firstName = data.firstName;
+      employeesList[index].lastName = data.lastName;
+      employeesList[index].email = data.email;
+      break;
+    }
+  }
+
+  res.send({message: 'Successfully updated employee data'});
+
+};
 
 
 var employeesList = [

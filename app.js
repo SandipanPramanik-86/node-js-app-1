@@ -24,6 +24,7 @@ app.get('/', function (req, res) {
 app.get('/employees', emp.getEmployees);
 app.get('/employees/:id', emp.getEmployeeById);
 app.post('/employees', emp.createEmployee);
+app.put('/employees/:id', emp.updateEmployee);
 
 app.listen(PORT);
 console.log(message.getPortMessage() + PORT);
