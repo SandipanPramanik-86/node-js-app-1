@@ -18,8 +18,8 @@ app.get('/', function (req, res) {
 
 //REST HTTP Methods
 app.get('/employees', emp.getEmployees);
-app.get('/employees/:id', emp.getEmployeesById);
-
+app.get('/employees/:id', emp.getEmployeeById);
+app.post('/employees', emp.createEmployee);
 
 app.listen(PORT);
 console.log(message.getPortMessage() + PORT);

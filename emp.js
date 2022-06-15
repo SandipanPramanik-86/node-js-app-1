@@ -3,7 +3,7 @@ exports.getEmployees = function(req, res) {
     res.send(employeesList);
   };
   
-exports.getEmployeesById =  function(req, res) {
+exports.getEmployeeById =  function(req, res) {
       var empId = req.params.id;
   
     var empFound = employeesList.filter(function(employee) {
@@ -12,6 +12,13 @@ exports.getEmployeesById =  function(req, res) {
   
     res.send(empFound);	
   };
+
+  exports.createEmployee = function(req, res) {
+    
+    var data = req.body;
+    employeesList.push(data);
+    res.send({message: 'Successfully created employee data'});
+}; 
 
 
 var employeesList = [
