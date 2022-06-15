@@ -25,8 +25,11 @@ exports.updateEmployee = function(req, res) {
   var data = req.body;
 
   for (var index = 0; index < employeesList.length; index++) {
+    console.log("index: " + index);
+    console.log("empId: " + employeesList[index].id);
     if (employeesList[index].id === paramId) {
-      console.log(paramId + data.firstName);
+      console.log("paramId: " + paramId);
+      console.log("data: " + data);
       employeesList[index].firstName = data.firstName;
       employeesList[index].lastName = data.lastName;
       employeesList[index].email = data.email;
