@@ -7,6 +7,7 @@ RUN apk update && apk upgrade
 COPY package.json /app/package.json
 COPY app.js /app/app.js
 COPY utils.js /app/utils.js
+COPY emp.js /app/emp.js
 WORKDIR /app
 RUN npm install
 

@@ -1,7 +1,7 @@
 
 var express = require('express');
 const message = require('./utils');
-const emp = require('./routes/emp');
+const emp = require('./emp');
 
 var PORT;
 if (process.env.PORT) {
