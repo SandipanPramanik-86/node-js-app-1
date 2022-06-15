@@ -34,6 +34,19 @@ exports.updateEmployee = function(req, res) {
   }
 
   res.send({message: 'Successfully updated employee data'});
+};
+
+exports.deleteEmployee = function(req, res) {
+  var paramId = req.params.id;
+
+  for (var index = 0; index < employeesList.length; index++) {
+    if (employeesList[index].id == paramId) {
+      employeesList.splice(index, 1);
+      break;
+    }
+  }
+
+  res.send({message: 'Successfully deleted employee data'});
 
 };
 
